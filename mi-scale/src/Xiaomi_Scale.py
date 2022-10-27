@@ -34,7 +34,7 @@ def MQTT_discovery():
     for MQTTUser in (USERS):
         message = '{"name": "' + MQTTUser.NAME + ' 体重",'
         message+= '"state_topic": "' + MQTT_PREFIX + '/' + MQTTUser.NAME + '/weight",'
-        message+= '"value_template": "{{ value_json.重量 }}",'
+        message+= '"value_template": "{{ value_json.weight }}",'
         message+= '"json_attributes_topic": "' + MQTT_PREFIX + '/' + MQTTUser.NAME + '/weight",'
         message+= '"icon": "mdi:scale-bathroom",'
         message+= '"state_class": "measurement"}'
@@ -109,7 +109,7 @@ def MQTT_publish(weight, unit, mitdatetime, hasImpedance, miimpedance):
           bodytype = "平衡瘦型"
         elif str(bodyscale[lib.getBodyType()]) == "Skinny-muscular":
           bodytype = "瘦肌肉型"
-        message += ',"身体类型":"' + str(bodyscale[lib.getBodyType()]) + '"'
+        message += ',"身体类型":"' + bodytype + '"'
         message += ',"代谢年龄":' + "{:.0f}".format(lib.getMetabolicAge())
         message += ',"阻抗":' + "{:.0f}".format(int(miimpedance))
 
